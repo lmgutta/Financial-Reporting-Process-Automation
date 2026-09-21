@@ -1,315 +1,198 @@
 # Financial Reporting & Process Automation System
 
-**Built with Google Sheets & Google Apps Script**
+**Store-by-store financial visibility for a multi-store retail business, built without an ERP**
 
-> **What if a spreadsheet could behave more like an operational reporting system?**
+> **[Open the live system →](https://script.google.com/macros/s/AKfycbzwI_J2uqmOLrd8OHRgPB8k0FgO0yo8UcFbDgYQBNBJE2H8YEmiSD2M4YctMBAIfy7RdQ/exec)**
 >
-> I built this system to turn raw POS exports from a multi-store retail business into **automated financial and operational intelligence** — without an ERP.
->
-> It combines **self-service reporting, exception management, historical performance analysis, and forward-looking store projections** in one automated workflow.
->
-> **Track what happened. Identify where performance is breaking down. Compare it with historical performance. See where it may be heading next.**
->
-> **[Try the live system →](https://docs.google.com/spreadsheets/d/1YYBE2KYu3kiaScHik_HveYuyL2x-1oX_r-fDtDRhDWw/edit?usp=sharing)**
->
-> *All data in this repository is synthetic. No real customer, transaction, or company data is included.*
+> *All data shown is synthetic. No real customer, transaction or company data is included.*
 
 ---
 
-## At a Glance
+## TL;DR
 
-| Capability | What it does |
+A multi-store retailer had POS data but no quick way to turn it into decisions. This system converts raw POS exports into six management reports that managers open from a link and filter themselves.
+
+- **What it answers:** who owes money, which stores are growing or slipping, how much cash came in, how customers pay, and where each store is heading.
+- **Who it's for:** store and regional managers, without needing access to the underlying spreadsheet.
+- **How it works:** choose a report, filter by store, month, year and payment type, and read the entire business or each store separately.
+- **Why it matters:** it replaces slow, manual report preparation with a repeatable process managers run themselves, while a full ERP is out of reach.
+
+---
+
+## Table of Contents
+
+1. [The Problem](#the-problem)
+2. [What Managers Can Do With It](#what-managers-can-do-with-it)
+3. [The Six Reports](#the-six-reports)
+4. [A Typical Review](#a-typical-review)
+5. [What Changes](#what-changes)
+6. [How the Reports Stay Trustworthy](#how-the-reports-stay-trustworthy)
+7. [Screenshots](#screenshots)
+8. [Try It](#try-it)
+9. [Limits of This Version](#limits-of-this-version)
+10. [Why a Bridge Tool](#why-a-bridge-tool)
+11. [Under the Hood](#under-the-hood)
+12. [Background](#background)
+
+---
+
+## The Problem
+
+The business ran several retail stores on a basic POS with no central financial reporting.
+
+Store managers could export transactions, but the questions that mattered took hours of manual work to answer:
+
+- **Who owes us money, and how much?**
+- **Which stores are growing, and which are slipping?**
+- **How much cash have we actually collected?**
+- **How are customers paying, and is that changing?**
+- **How does this month compare with the same period before?**
+- **What is likely to happen next month?**
+
+The data was there. Getting answers meant a request to someone, a wait, and often a report that was already out of date.
+
+---
+
+## What Managers Can Do With It
+
+| Manager's question | Where they find the answer |
 |---|---|
-| **Automated Reporting** | Converts raw POS exports into management-ready reporting |
-| **Exception Management** | Identifies and ranks overdue customers by store |
-| **12-Month Rolling Views** | Keeps operational trends focused on the most recent year |
-| **Historical Comparison** | Compares current performance against up to three years of history |
-| **Performance Projections** | Projects next-month and rolling 3-month store performance |
-| **Self-Service Analysis** | Lets managers filter by store, month, year and payment type |
-| **Process Automation** | Uses Google Apps Script to automate reporting and chart generation |
+| How is the business doing overall? | Financial overview |
+| Who should I chase for payment? | Overdue parties |
+| Is this store growing or declining? | Store trend |
+| How does this store take payment? | Store performance |
+| Where is our cash coming from? | Cash flow and banking |
+| Are customers shifting how they pay? | Payment types |
+
+**Self-service.** Managers open a link, choose a report and narrow it by **store, month, year and payment type**. They don't wait for anyone to build a report or need access to the underlying spreadsheet.
+
+**Business first, then store.** Every report opens on the **entire business** and says so clearly, so nobody mistakes a company-wide figure for one store. One tick switches to each store separately.
 
 ---
 
-## The Business Problem
+## The Six Reports
 
-The underlying business operated across multiple retail locations using a basic POS system, but lacked a central financial reporting solution.
+### Financial Overview
+*How much did we sell, how much have we collected, and how much is still owed?*
+Revenue, cash received, outstanding balances, average sale size and collection rate.
 
-Operational managers could access transaction exports, but meaningful analysis required manually combining and interpreting raw data:
+### Overdue Parties
+*Who do we need to chase?*
+The **top 15 customers per store** with balances past their due date, largest first. Each store manager sees their own list, not a company-wide one they can't act on.
 
-- Which customers had overdue balances?
-- Which stores were driving revenue growth or decline?
-- How much cash had actually been collected?
-- Which payment methods were being used?
-- How did current performance compare with previous years?
-- What was likely to happen over the coming months?
+### Store Trend
+*Where is each store heading?*
+Six months of sales and transaction counts, plus a **projection for next month and a rolling three-month average**, drawn separately so forecasts are never mistaken for actuals.
 
-This created a **reporting bottleneck**: data was available, but converting it into useful management information required significant manual effort.
+### Store Performance
+*How are customers paying at this store?*
+Monthly sales split by payment type.
 
-The objective was therefore not simply to build a dashboard, but to create a **repeatable reporting process that managers could operate themselves.**
+### Cash Flow and Banking
+*Where is our money?*
+Cash, bank, card, credit note and outstanding credit, month by month.
 
----
-
-## The Solution
-
-The system converts raw POS transaction data into a structured reporting workflow:
-
-**POS data → Data processing → Validation → Filtering → Analysis → Exception identification → Management reporting**
-
-The system is designed around six core reporting modules.
-
-| Module | Purpose |
-|---|---|
-| **Financial Overview** | Revenue, cash collected, outstanding balances and collection rate |
-| **Overdue Parties** | Store-level identification and ranking of overdue customers |
-| **Store Trend Overview** | Monthly performance, historical comparison and forward-looking projections |
-| **Store Performance** | Store-level revenue and payment collection performance |
-| **Cash Flow & Banking** | Cash, bank, card and outstanding balances |
-| **Payment Type Overview** | Changes in customer payment behaviour over time |
-
-Every module can be filtered by **store, month, year and payment type**, allowing managers to move from a high-level view into the underlying operational detail.
+### Payment Types
+*Is customer payment behaviour changing?*
+Monthly sales for each payment type, store by store.
 
 ---
 
-## Key Capabilities
+## A Typical Review
 
-### Rolling 12-Month Reporting
+A regional manager's Monday morning:
 
-Month-based reporting automatically uses the **most recent 12 months** rather than allowing historical data to accumulate indefinitely.
+1. **Financial overview.** Collection rate has dipped, so outstanding balances are growing.
+2. **Overdue parties.** Filter to the store with the largest balance. The top customers are listed, so the follow-up calls are clear.
+3. **Store trend.** The same store's sales are flat and its projection points down, which is worth a conversation.
+4. **Payment types.** Credit sales at that store have risen against cash, and that explains the collection problem.
 
-This keeps reporting readable as the business grows and prevents charts from becoming increasingly difficult to interpret.
-
-### Historical Year-over-Year Comparison
-
-Monthly performance can be viewed alongside historical annual totals for up to **three years**, allowing managers to compare current performance against previous periods.
-
-Historical totals are separated visually from monthly figures to maintain readability despite the difference in scale.
-
-### Store Performance Projections
-
-The **Store Trend Overview** introduces forward-looking analysis using each store's trailing 12 months of actual performance.
-
-It provides:
-
-- **Next Month projection**
-- **Rolling 3-Month average projection**
-
-Projected values are explicitly labelled and visually separated from historical actuals.
-
-This extends the system from purely retrospective reporting toward **forward-looking operational decision support**.
-
-### Store-Level Exception Analysis
-
-The Overdue Parties module was redesigned from a single global list into **store-specific top-15 overdue customer lists**.
-
-This makes the information actionable for managers responsible for individual locations rather than presenting them with an aggregated company-wide list.
-
-### Automated Reporting
-
-Google Apps Script automates dashboard refreshes and chart generation.
-
-The system is designed so that adding stores, months and transactions does not require manually rebuilding formulas or charts.
-
-### Data-Quality Controls
-
-The reporting logic uses transaction dates rather than text-based month labels to maintain chronological ordering.
-
-This prevents issues such as:
-
-> April → August → December → February → January
-
-and ensures that month-based reporting follows the actual transaction timeline.
+Four views. No spreadsheet manipulation, no request to anyone.
 
 ---
 
-## Why This Matters Operationally
+## What Changes
 
-The value of the system is not the dashboard itself. It is the **workflow it replaces**.
+The reporting process is the same in spirit, but it takes fewer steps.
 
-### Before
+| | **Previously** | **Now** |
+|---|---|---|
+| **Getting a report** | Prepared by request from a POS export | Available on demand from a link |
+| **Following up on a question** | Often needs a new pass through the data | Change a filter |
+| **Finding overdue customers** | Cross-referenced by hand | Listed and ranked by store |
+| **Comparing periods** | Rebuilt for each review | Rolling 12-month view |
+| **Looking ahead** | Judgement from experience | Judgement backed by a projection |
+| **Adding a store or month** | Formulas and charts adjusted by hand | Included automatically |
 
-**POS exports → Manual cross-referencing → Spreadsheet manipulation → Analysis → Management request**
-
-### After
-
-**POS export → Automated processing → Filter → Analyse → Identify exception → Take action**
-
-This provides managers with:
-
-- **Faster reporting** — information is available without waiting for manually prepared reports.
-- **Self-service analysis** — managers can investigate stores, periods and payment types independently.
-- **Exception visibility** — overdue balances and performance issues are surfaced directly.
-- **Historical context** — current performance can be evaluated against previous periods.
-- **Forward visibility** — store-level projections provide an indication of expected near-term performance.
-- **Repeatability** — the reporting process does not depend on manually rebuilding spreadsheets each reporting cycle.
+The system doesn't replace management judgement. It removes the preparation work that came before it.
 
 ---
 
-## How It Works
+## How the Reports Stay Trustworthy
 
-### 1. Load the Data
+A reporting system is only useful if managers trust the numbers, so the rules are deliberately simple and consistent.
 
-Paste the POS transaction export into the data input area.
-
-### 2. Process the Data
-
-The system processes the transaction data and prepares it for reporting.
-
-### 3. Apply Filters
-
-Select the relevant:
-
-- Store
-- Month
-- Year
-- Payment type
-
-### 4. Refresh the Dashboard
-
-Google Apps Script rebuilds the relevant charts and reporting views.
-
-### 5. Analyse
-
-Move from summary metrics into store-level, customer-level and time-based detail.
-
-### 6. Identify Exceptions
-
-Use overdue balances, performance trends and projections to identify areas requiring management attention.
-
----
-
-## Try It Yourself
-
-**All data in the published version is synthetic.**
-
-1. **[Open the live template →](https://docs.google.com/spreadsheets/d/1YYBE2KYu3kiaScHik_HveYuyL2x-1oX_r-fDtDRhDWw/edit?usp=sharing)**
-2. Select **File → Make a Copy**
-3. Open **Data Generator**
-4. Click **Generate Data**
-5. Open **Dashboard**
-6. Set your desired filters
-7. Click **Refresh All Charts**
-8. Drill into a store, month or payment type
-
-The generator allows different scenarios to be created without exposing any real business data.
+- **One definition everywhere.** Payment type, month and year are worked out once, so every report agrees with every other.
+- **Bad rows are counted, not hidden.** Any record missing a store, date or payment type is excluded from every report, and the home page shows how many were left out.
+- **Overdue means overdue.** Only balances whose due date has already passed are counted.
+- **Months stay in order.** Reports follow the actual transaction date, so months never appear alphabetically (April, August, December, February…).
+- **Exact filters.** Choosing "Credit" shows Credit and nothing else.
+- **Rolling 12 months.** Charts stay readable as the business grows.
 
 ---
 
 ## Screenshots
-
-<img width="2188" height="1092" alt="image" src="https://github.com/user-attachments/assets/d25f9592-be7e-44e8-8890-11a28d17ab2e" />
-<img width="2208" height="1084" alt="image" src="https://github.com/user-attachments/assets/a270f85a-aa89-44e0-b37f-b6316fa38ea2" />
-<img width="2362" height="1104" alt="image" src="https://github.com/user-attachments/assets/34c92069-2006-441a-a0ba-45e2c18266a8" />
-<img width="1402" height="808" alt="image" src="https://github.com/user-attachments/assets/2029bffd-4fc3-4617-8624-a73d8cf48762" />
-<img width="1924" height="716" alt="image" src="https://github.com/user-attachments/assets/2c133bc5-b242-42a1-9711-1ef24ac2e825" />
-<img width="1528" height="912" alt="image" src="https://github.com/user-attachments/assets/a4d0501e-7e80-4980-9a38-2a4de5a1e6f9" />
-
-
----
-
-## Design Principles
-
-### Self-Service Over Centralised Reporting
-
-The system was designed for operational managers who need answers without submitting a reporting request and waiting for someone else to prepare the analysis.
-
-### Automation Over Manual Maintenance
-
-Traditional spreadsheets often become increasingly fragile as new stores, columns and reporting periods are added.
-
-The system therefore uses:
-
-- Column-name-based references rather than positional references
-- Automated chart rebuilding
-- Dynamic reporting periods
-- Automated synthetic-data generation
-
-### Operational Usefulness Over Dashboard Complexity
-
-The objective was not to maximise the number of charts.
-
-Each module exists to answer a specific operational question:
-
-> **What happened? Where did it happen? Why does it matter? What should the manager look at next?**
-
-### Bridge to Enterprise Systems
-
-The system follows a **"bridge tool" philosophy**.
-
-A spreadsheet-based solution can provide useful operational visibility while an organisation lacks the budget, infrastructure or implementation timeline for a full ERP solution.
-
-The structure is deliberately designed around defined data inputs, processing logic, reporting outputs and management workflows, making it possible to evolve toward a more integrated enterprise system rather than repeatedly rebuilding reporting from scratch.
+<img width="2880" height="1460" alt="image" src="https://github.com/user-attachments/assets/97b40690-697e-402e-84ec-2077460f68bd" />
+<img width="2486" height="898" alt="image" src="https://github.com/user-attachments/assets/b6792ab8-530b-476e-9400-a6e6f298de66" />
+<img width="2484" height="1400" alt="image" src="https://github.com/user-attachments/assets/1bdd43d9-e653-415b-9c4e-87f39878094f" />
+<img width="2482" height="1394" alt="image" src="https://github.com/user-attachments/assets/48c87ebb-6fed-4955-930b-04d6b5e216ed" />
+<img width="2484" height="1404" alt="image" src="https://github.com/user-attachments/assets/d621cc09-f432-419b-9973-d27353978fba" />
+<img width="2486" height="1024" alt="image" src="https://github.com/user-attachments/assets/0c873ad3-f013-476e-9334-1c01c9ace49f" />
+<img width="2468" height="1028" alt="image" src="https://github.com/user-attachments/assets/39243cfa-4caf-43f6-b4f6-8bc752d99b1c" />
 
 ---
 
-## Full Write-Up
+## Try It
 
-Built independently after identifying a financial and operational reporting gap during an operations role at a multi-store retail business.
+The published version uses synthetic data.
 
-Traditional spreadsheets are fragile — a deleted row, an added column, or a new store opening would normally break formulas and charts, requiring hours of manual fixing.
+1. **[Open the system →](https://script.google.com/macros/s/AKfycbzwI_J2uqmOLrd8OHRgPB8k0FgO0yo8UcFbDgYQBNBJE2H8YEmiSD2M4YctMBAIfy7RdQ/exec)**
+2. Choose **Generate random data** and pick the number of stores, months and transactions.
+3. Open any report and try the filters.
+4. Tick **Show each store separately** to compare stores.
 
-This tool was engineered to reduce that maintenance burden: formulas reference columns by name rather than position, reporting periods are dynamically determined, and charts are rebuilt through automation.
-
-### Process Flow
-
-**POS export → Data processing → Validation → Filters → Automated reporting → Management analysis**
-
-### How It Works for the User
-
-1. **Paste the data** — drop the raw POS export into the data tab.
-2. **Set the filters** — select store, month, year or payment type.
-3. **Refresh** — the reporting views and charts rebuild automatically.
-4. **Analyse** — drill from summary metrics into store and transaction-level information.
-5. **Act** — use exceptions, trends and projections to identify areas requiring attention.
+In real use, managers choose **Import POS data** and paste an export. Existing invoices are updated and new ones added, so re-importing never creates duplicates.
 
 ---
 
-## Limitations of the Demo
+## Limits of This Version
 
-This published version is deliberately modified to demonstrate the system's capabilities using synthetic data.
-
-### Synthetic Data
-
-No real customer, transaction or company data is included in this repository.
-
-### Generate-Only Workflow
-
-The published version generates a fresh synthetic dataset rather than reproducing the incremental POS paste-and-append workflow used in the original environment.
-
-### Spreadsheet Scalability
-
-The system is designed to handle growth without routine manual rework, but it remains a spreadsheet-based solution.
-
-It is **not intended to replace a fully integrated ERP or financial management platform at scale**.
-
-The purpose is to demonstrate how a structured, automated reporting process can provide value before — or alongside — a larger enterprise-system implementation.
+- **Synthetic data only.** No real business information is included.
+- **A bridge, not an ERP.** It gives useful visibility now. It isn't designed to replace an integrated financial platform at scale.
+- **Larger data loads more slowly.** It suits a growing multi-store business, not unlimited volume.
+- **Open access.** Anyone with the link can view it. Add access controls before using real business data.
+- **Dates are read as day/month/year.**
 
 ---
 
-## The Bigger Picture
+## Why a Bridge Tool
 
-The project follows a **"bridge tool" philosophy**:
+Many growing businesses wait years for an ERP they can't yet afford. In the meantime, decisions are made on gut feel or on reports that arrive too late.
 
-> Provide operational managers with a useful analytical system today, without waiting for an ERP implementation, while keeping the underlying data structure and reporting logic organised enough to evolve into a more integrated solution later.
+This system takes the opposite approach. It provides useful visibility **today**, on tools the business already has, and it keeps the data structure and reporting logic organised so the business can move to a fuller system **later** without starting over.
 
-The broader objective is to demonstrate how **process design, automation, data visibility and operational analytics** can be combined to solve practical business problems.
-
----
-
-## Technology
-
-- **Google Sheets**
-- **Google Apps Script**
-- Spreadsheet-based data modelling
-- Automated reporting
-- Dynamic chart generation
-- Synthetic data generation
-
-**AI-assisted development** was used during implementation.
+> **The aim is not to build a dashboard. It is to replace a slow, manual reporting habit with a repeatable process that managers run themselves.**
 
 ---
 
-## Project Context
+## Under the Hood
 
-The system was developed independently after identifying a financial and operational reporting gap during an operations role at a multi-store retail business.
+A short note for the curious. The system runs as a web page on Google Sheets and Google Apps Script. The spreadsheet holds only the transaction data, and all filtering, calculation and charting happens in the page. Free, familiar tools mean the business owns and understands what it runs on.
 
-The published version has been reconstructed and modified using synthetic data to demonstrate the underlying **process design, reporting logic, automation and analytical capabilities** without exposing proprietary information.
+---
+
+## Background
+
+Built independently after spotting a financial and operational reporting gap while working in operations at a multi-store retail business.
+
+The published version was rebuilt on synthetic data to show the process design and reporting approach without exposing any proprietary information.
